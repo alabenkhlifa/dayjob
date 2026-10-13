@@ -35,7 +35,7 @@ Ask `whats-next` anytime. It reads your branch, your open PRs and the time of da
 |---|---|---|
 | Anytime | `whats-next` *(soon)* | Reads your branch, PRs and time of day; tells you which skill fits now |
 | Daily | `standup` | Yesterday / Today / Blockers from your commits, PRs and tickets |
-| | `start-ticket` *(soon)* | Ticket → questions → plan → the smallest change that fits the codebase |
+| | `start-ticket` | Ticket → questions → plan → the smallest change that fits the codebase |
 | | `fix-bug` *(soon)* | Root cause first, fix at the source, prove nothing else broke |
 | | `ship-pr` *(soon)* | Clean commits and a PR description reviewers can read in a minute |
 | | `review-pr` *(soon)* | Finds what would break in production; specific, kind comments |
