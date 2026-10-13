@@ -1,0 +1,20 @@
+{
+  "name": "skills-library",
+  "description": "Marketplace for the skills-library agent skills methodology",
+  "owner": {
+    "name": "Ala Ben Khalifa",
+    "url": "https://github.com/alabenkhlifa"
+  },
+  "plugins": [
+    {
+      "name": "skills-library",
+      "description": "Agent skills methodology for Claude Code, Cursor, Codex and other coding agents.",
+      "version": "0.1.0",
+      "source": "./",
+      "author": {
+        "name": "Ala Ben Khalifa",
+        "url": "https://github.com/alabenkhlifa"
+      }
+    }
+  ]
+}
