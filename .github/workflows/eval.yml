@@ -1,0 +1,29 @@
+name: eval
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [labeled]
+jobs:
+  eval:
+    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'run-evals'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install -g @anthropic-ai/claude-code
+      - run: >
+          claude plugin eval . --trust-plugin --scaffold
+          --allow-tools Bash Edit Write
+          --threshold 0.8 --no-publish --max-cost-usd 25
+          --json eval-results.json
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eval-results
+          path: |
+            eval-results.json
+            evals/results/
