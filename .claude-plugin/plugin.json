@@ -1,13 +1,13 @@
 {
-  "name": "skills-library",
-  "description": "Agent skills methodology for Claude Code, Cursor, Codex and other coding agents.",
+  "name": "dayjob",
+  "description": "Your agent writes the code. dayjob handles the rest of the job: standups, tickets, PRs, reviews, incidents, 1:1s.",
   "version": "0.1.0",
   "author": {
     "name": "Ala Ben Khalifa",
     "url": "https://github.com/alabenkhlifa"
   },
-  "homepage": "https://github.com/alabenkhlifa/skills-library",
-  "repository": "https://github.com/alabenkhlifa/skills-library",
+  "homepage": "https://github.com/alabenkhlifa/dayjob",
+  "repository": "https://github.com/alabenkhlifa/dayjob",
   "license": "MIT",
   "keywords": ["skills", "claude-code", "agent-skills", "workflow"]
 }

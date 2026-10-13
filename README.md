@@ -1,62 +1,87 @@
-# skills-library
+# dayjob
 
-> TODO: one-sentence promise. Name the problem you kill, e.g. "Stops your agent from shipping 'done' instead of 'correct'."
+> Your agent writes the code. **dayjob** handles the rest of the job.
 
-[![GitHub stars](https://img.shields.io/github/stars/alabenkhlifa/skills-library?style=social)](https://github.com/alabenkhlifa/skills-library)
+[![GitHub stars](https://img.shields.io/github/stars/alabenkhlifa/dayjob?style=social)](https://github.com/alabenkhlifa/dayjob)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+Standups, tickets, PRs, reviews, incidents, status updates, 1:1s. dayjob is a set of agent skills for the whole software engineering job, organized around the rhythm of your week.
 
 **Quick start (Claude Code):**
 
 ```
-/plugin marketplace add alabenkhlifa/skills-library
-/plugin install skills-library@skills-library
+/plugin marketplace add alabenkhlifa/dayjob
+/plugin install dayjob@dayjob
 ```
 
-TODO: before/after demo (GIF or side-by-side screenshot). Proof sells more than prose.
+Then ask: *"what's next?"*
 
-## The problem
+## The rest of the job
 
-TODO: 3-4 concrete failures your readers hit every day with coding agents. Be specific.
+Coding agents got good at writing code. The job is more than that:
+
+- The first ten minutes of the day go to digging through `git log` to remember what you did yesterday.
+- Tickets arrive half-written, and the agent happily builds the wrong thing.
+- PR descriptions say "fix stuff", and reviews miss the bug that matters.
+- The Friday update, the postmortem, the 1:1 prep, the self-review: all from memory, all at the last minute.
+
+dayjob gives your agent a skill for each of these, built on what is already in your repo (git, `gh`) and on your tools when they are connected (Jira, Linear, Slack, calendar).
 
 ## How it works
 
-TODO: the workflow, one line per stage, each mapped to the skill that runs it.
+Ask `whats-next` anytime. It reads your branch, your open PRs and the time of day, and points you to the skill that fits.
 
-```
-stage 1  ->  stage 2  ->  stage 3  ->  ...
-```
+| Rhythm | Skill | What it does |
+|---|---|---|
+| Anytime | `whats-next` *(soon)* | Reads your branch, PRs and time of day; tells you which skill fits now |
+| Daily | `standup` *(soon)* | Yesterday / Today / Blockers from your commits, PRs and tickets |
+| | `start-ticket` *(soon)* | Ticket → questions → plan → the smallest change that fits the codebase |
+| | `fix-bug` *(soon)* | Root cause first, fix at the source, prove nothing else broke |
+| | `ship-pr` *(soon)* | Clean commits and a PR description reviewers can read in a minute |
+| | `review-pr` *(soon)* | Finds what would break in production; specific, kind comments |
+| Weekly | `weekly-update` *(soon)* | Shipped / In progress / Risks / Asks from your week |
+| | `refactor` *(soon)* | Quick cleanups or deep restructuring without changing behavior |
+| | `design-doc` *(soon)* | Problem → options → decision, as a design doc or ADR |
+| When it breaks | `incident` *(soon)* | Live triage: impact, mitigation, running timeline |
+| | `postmortem` *(soon)* | Blameless write-up from the incident timeline |
+| Career | `one-on-one` *(soon)* | Wins, blockers and asks for your next 1:1 |
+| | `brag-doc` *(soon)* | Logs wins as they happen; drafts your self-review |
 
-## Skills
-
-| Skill | When it fires | What it does |
-|-------|---------------|--------------|
-| TODO  |               |              |
+Every skill drafts first and asks before posting anything to Slack, Jira or GitHub.
 
 ## Installation
 
 ### Claude Code
 
 ```
-/plugin marketplace add alabenkhlifa/skills-library
-/plugin install skills-library@skills-library
+/plugin marketplace add alabenkhlifa/dayjob
+/plugin install dayjob@dayjob
 ```
 
 ### Any agent (Cursor, Codex, Copilot, Gemini CLI, OpenCode, ...)
 
 ```
-npx skills add alabenkhlifa/skills-library
+npx skills add alabenkhlifa/dayjob                      # all skills
+npx skills add alabenkhlifa/dayjob --skill standup      # just one
 ```
 
 ### Manual
 
 ```
-git clone https://github.com/alabenkhlifa/skills-library.git
-cp -r skills-library/skills/* ~/.claude/skills/
+git clone https://github.com/alabenkhlifa/dayjob.git
+cp -r dayjob/skills/* ~/.claude/skills/
 ```
 
 ## Contributing
 
-Each skill lives in `skills/<name>/SKILL.md`. Open an issue before adding a new skill so it fits the workflow.
+Each skill lives in `skills/<name>/SKILL.md` and ships with eval cases in `evals/<name>-*/`. Before opening a PR:
+
+```
+bash scripts/lint-skills.sh
+claude plugin eval . --scaffold --case '<name>-*'
+```
+
+A new skill must score higher with the plugin than without it.
 
 ## License
 
