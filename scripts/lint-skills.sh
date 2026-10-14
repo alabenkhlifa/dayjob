@@ -24,6 +24,7 @@ for dir in "${dirs[@]}"; do
   file="${dir}SKILL.md"
   [ -f "$file" ] || { err "$name" "missing SKILL.md"; continue; }
   [ "$(head -n 1 "$file")" = "---" ] || err "$name" "SKILL.md must start with frontmatter"
+  [ "$(grep -c '^---$' "$file")" -ge 2 ] || err "$name" "frontmatter is not closed"
   [ "$(frontmatter_value "$file" name)" = "$name" ] || err "$name" "frontmatter name must equal folder name"
   desc=$(frontmatter_value "$file" description)
   [[ "$desc" == "Use when"* ]] || err "$name" "description must start with 'Use when'"

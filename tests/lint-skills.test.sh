@@ -43,5 +43,9 @@ expect "missing SKILL.md fails" 1 "missing SKILL.md" "$t"
 t=$(mktemp -d); mkdir -p "$t/skills"
 expect "no skills is fine" 0 "no skills found" "$t"
 
+t=$(mktemp -d); mkdir -p "$t/skills/open"
+printf -- '---\nname: open\ndescription: Use when testing\nbody without closing\n' > "$t/skills/open/SKILL.md"
+expect "frontmatter must be closed" 1 "frontmatter is not closed" "$t"
+
 [ "$failures" -eq 0 ] && echo "all lint tests passed"
 exit "$failures"

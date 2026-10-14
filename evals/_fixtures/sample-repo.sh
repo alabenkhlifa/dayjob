@@ -16,6 +16,8 @@ mate=("Sam Other" "sam@example.com")
 git init -q -b main
 git config user.name "${me[0]}"
 git config user.email "${me[1]}"
+git config commit.gpgsign false
+git config core.hooksPath /dev/null
 
 cat > package.json <<'JSON'
 { "name": "sample-shop", "version": "1.0.0", "private": true, "scripts": { "test": "node --test" } }
