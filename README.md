@@ -45,7 +45,7 @@ Ask `whats-next` anytime. It reads your branch, your open PRs and the time of da
 | When it breaks | `incident` | Live triage: impact, mitigation, running timeline |
 | | `postmortem` | Blameless write-up from the incident timeline |
 | Career | `one-on-one` | Wins, blockers and asks for your next 1:1 |
-| | `brag-doc` *(soon)* | Logs wins as they happen; drafts your self-review |
+| | `brag-doc` | Logs wins as they happen; drafts your self-review |
 
 Every skill drafts first and asks before posting anything to Slack, Jira or GitHub.
 
