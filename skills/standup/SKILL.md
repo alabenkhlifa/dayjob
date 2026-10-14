@@ -12,7 +12,7 @@ Draft a paste-ready standup from real activity: Yesterday / Today / Blockers.
 Run these; skip any command that fails and keep going. If `git` itself will not run, say so and ask the user what they worked on.
 
 1. Who am I: `git config user.name` and `git config user.email`.
-2. Window: since the last working day. `date +%u` gives 1 on Monday → window starts Friday 00:00; otherwise yesterday 00:00. A range the user gives wins.
+2. Window: since the last working day. If `date +%u` prints 1 (Monday), use `--since="last friday 00:00"`; otherwise `--since="yesterday 00:00"`. A range the user gives wins. For `gh` dates use `d=$(date -v-1d +%F 2>/dev/null || date -d yesterday +%F)` (Monday: `-v-3d` / `"3 days ago"`).
 3. My commits on all branches:
    `git log --all --no-merges --author="<email>" --since="<window start>" --format='%h %ad %s' --date=short`
    If that is empty, retry with `--author="<name>"`.
@@ -42,7 +42,7 @@ If steps 3, 4 and 6 (commits, PRs, tickets) find nothing for this identity, repl
 - None
 ```
 
-Max 3 bullets per section. In the normal case, add nothing before or after the template except the closing line (a one-line caveat is fine when it changes how to read the standup). End with one line: "Want me to post it?" Post to Slack, Teams or a ticket only after an explicit yes, and only if a tool for it is available.
+Max 3 bullets per section. In the normal case, add nothing before or after the template except the closing line (a one-line caveat is fine when it changes how to read the standup). If a Slack, Teams or ticket tool is available, end with one line: "Want me to post it?" and post only after an explicit yes. Otherwise end after the template.
 
 ## Rules
 

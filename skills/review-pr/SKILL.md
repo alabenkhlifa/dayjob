@@ -16,7 +16,9 @@ base=$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null | sed 's|^o
 
 `<base>` is the remote's default branch (snippet above), falling back to `main` or `master`.
 
-- PR number or URL with `gh` → `gh pr view <n>` (title, body, linked issue) and `gh pr diff <n>`.
+If `<base>` comes back empty (no `origin/HEAD` and no `main` or `master`), ask the user which branch is the base before going on.
+
+- PR number or URL with `gh` → `gh pr view <n>` (title, body, linked issue), `gh pr diff <n>`, and `git fetch origin pull/<n>/head:pr-<n>` so you can read the PR's files with `git show pr-<n>:<path>`.
 - PR number without `gh` → GitHub: `git fetch origin pull/<n>/head:pr-<n>`; GitLab: `git fetch origin merge-requests/<n>/head:mr-<n>`; otherwise ask for the branch name.
 - Branch → `git log <base>..<branch>` and `git diff <base>...<branch>`.
 - Nothing given → the current branch against its base.

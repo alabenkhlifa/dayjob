@@ -23,6 +23,8 @@ git log -10 --format=%s <base>
 
 `<base>` is the remote's default branch (snippet above), falling back to `main` or `master`. Also look for a PR template: `.github/pull_request_template.md` or `.github/PULL_REQUEST_TEMPLATE/`.
 
+If `<base>` comes back empty (no `origin/HEAD` and no `main` or `master`), ask the user which branch is the base before going on.
+
 ## 2. Guard
 
 - **On the base branch with changes:** create a branch first, `git switch -c <type>/<short-slug>`, named after the change. Never commit to the base branch unless the user explicitly asks to commit to it.

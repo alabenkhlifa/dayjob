@@ -46,6 +46,8 @@ Only suggest skills that are installed (they appear in your available skills); s
 
 `<base>` is the remote's default branch (snippet above), falling back to `main` or `master`.
 
+If `<base>` comes back empty, skip the "commits not yet on `<base>`" check.
+
 ## Output
 
 ```

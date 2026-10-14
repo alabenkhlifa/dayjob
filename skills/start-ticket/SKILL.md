@@ -19,6 +19,8 @@ List what is unclear: expected behavior, inputs and validation, edge cases, erro
 
 **Do not edit or create any file until the user confirms.** Exception: the user already said the requirements are final and to go ahead. Then state your understanding in one line and continue.
 
+If nothing is unclear, skip the questions: put your one-line understanding at the top of the plan in step 4 and ask for a single yes.
+
 ## 3. Read the codebase
 
 Find similar features to copy, helpers and constants to reuse, tests covering this area, and per-environment config. Cite `path:line` for each.
@@ -33,7 +35,7 @@ Tests:  <what you will add and run>
 Risks:  <what could break>
 ```
 
-Wait for a yes, unless the user pre-approved in step 2.
+Wait for a yes (one yes covers understanding and plan when there were no questions), unless the user pre-approved in step 2.
 
 ## 5. Build
 
