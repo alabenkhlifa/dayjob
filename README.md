@@ -37,7 +37,7 @@ Ask `whats-next` anytime. It reads your branch, your open PRs and the time of da
 | Daily | `standup` | Yesterday / Today / Blockers from your commits, PRs and tickets |
 | | `start-ticket` | Ticket → questions → plan → the smallest change that fits the codebase |
 | | `fix-bug` | Root cause first, fix at the source, prove nothing else broke |
-| | `ship-pr` *(soon)* | Clean commits and a PR description reviewers can read in a minute |
+| | `ship-pr` | Clean commits and a PR description reviewers can read in a minute |
 | | `review-pr` *(soon)* | Finds what would break in production; specific, kind comments |
 | Weekly | `weekly-update` *(soon)* | Shipped / In progress / Risks / Asks from your week |
 | | `refactor` *(soon)* | Quick cleanups or deep restructuring without changing behavior |
