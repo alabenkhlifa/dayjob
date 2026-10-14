@@ -43,7 +43,7 @@ Ask `whats-next` anytime. It reads your branch, your open PRs and the time of da
 | | `refactor` | Quick cleanups or deep restructuring without changing behavior |
 | | `design-doc` | Problem → options → decision, as a design doc or ADR |
 | When it breaks | `incident` | Live triage: impact, mitigation, running timeline |
-| | `postmortem` *(soon)* | Blameless write-up from the incident timeline |
+| | `postmortem` | Blameless write-up from the incident timeline |
 | Career | `one-on-one` *(soon)* | Wins, blockers and asks for your next 1:1 |
 | | `brag-doc` *(soon)* | Logs wins as they happen; drafts your self-review |
 
