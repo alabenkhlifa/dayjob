@@ -39,7 +39,7 @@ Ask `whats-next` anytime. It reads your branch, your open PRs and the time of da
 | | `fix-bug` | Root cause first, fix at the source, prove nothing else broke |
 | | `ship-pr` | Clean commits and a PR description reviewers can read in a minute |
 | | `review-pr` | Finds what would break in production; specific, kind comments |
-| Weekly | `weekly-update` *(soon)* | Shipped / In progress / Risks / Asks from your week |
+| Weekly | `weekly-update` | Shipped / In progress / Risks / Asks from your week |
 | | `refactor` *(soon)* | Quick cleanups or deep restructuring without changing behavior |
 | | `design-doc` *(soon)* | Problem → options → decision, as a design doc or ADR |
 | When it breaks | `incident` *(soon)* | Live triage: impact, mitigation, running timeline |
