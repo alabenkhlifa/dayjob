@@ -25,7 +25,7 @@ Run these; skip any command that fails and keep going.
 - **Blockers:** what slows you down — reviews waiting, unclear requirements, things the user mentioned.
 - **Asks:** what you need from this person (a decision, an intro, feedback, priorities). Mark each "(suggestion — confirm)".
 - **Topics:** 1–3 things worth raising (growth, workload, feedback both ways). Mark each "(suggestion — confirm)".
-- For a 1:1 with a report, flip it: their wins to recognize, their blockers to clear, questions to ask them.
+- For a 1:1 with a report, flip it: their wins to recognize, their blockers to clear, questions to ask them. Their wins and blockers come only from what the user tells you or from tickets assigned to them (when ticket MCP tools exist); if neither gives anything, ask the user. Never pull the report's git history.
 - Do not run tests or other project code.
 
 ## Output template
@@ -50,7 +50,7 @@ Max 4 bullets per section. End with one line: "Anything on your mind you want to
 
 ## Rules
 
-- Wins come only from the user's own commits, PRs, brag doc entries, or words. Always pass `--author` to `git log`; never include other people's work.
+- Your wins come only from the user's own commits, PRs, brag doc entries, or words. Always pass `--author` to `git log`; never include other people's work.
 - Never show tool errors; leave that source out.
 - Never send or post the prep anywhere.
 - Do not name or describe anyone else's commits, even to say you left them out. Nothing after the closing line.
