@@ -41,7 +41,7 @@ Ask `whats-next` anytime. It reads your branch, your open PRs and the time of da
 | | `review-pr` | Finds what would break in production; specific, kind comments |
 | Weekly | `weekly-update` | Shipped / In progress / Risks / Asks from your week |
 | | `refactor` | Quick cleanups or deep restructuring without changing behavior |
-| | `design-doc` *(soon)* | Problem → options → decision, as a design doc or ADR |
+| | `design-doc` | Problem → options → decision, as a design doc or ADR |
 | When it breaks | `incident` *(soon)* | Live triage: impact, mitigation, running timeline |
 | | `postmortem` *(soon)* | Blameless write-up from the incident timeline |
 | Career | `one-on-one` *(soon)* | Wins, blockers and asks for your next 1:1 |
