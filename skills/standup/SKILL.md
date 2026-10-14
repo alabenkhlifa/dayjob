@@ -26,7 +26,7 @@ If steps 3, 4 and 6 (commits, PRs, tickets) find nothing for this identity, repl
 
 - Group commits by theme; one bullet can cover several commits. Drop noise (typos, merges, wip) unless it is all there is.
 - Plain language a teammate outside the code understands. No `feat:`/`fix:` prefixes, no hashes.
-- **Today:** name the specific unfinished file or branch when you found one. Infer from the current branch, uncommitted work, open PRs, in-progress tickets. Do not run tests or other project code. Mark guesses with "(confirm)".
+- **Today:** name the specific unfinished file or branch when you found one. Infer from the current branch (name it), uncommitted work, what your latest commits leave unfinished (e.g. a test added but no fix yet), open PRs, in-progress tickets. Do not run tests or other project code. Mark guesses with "(confirm)".
 - **Blockers:** only real ones: failing CI, a PR waiting on review for more than a day, something the user said. Otherwise "None".
 
 ## Output template
