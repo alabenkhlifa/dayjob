@@ -29,8 +29,8 @@ Pick one, say why, and say what would change your mind.
 
 ## 5. Format
 
-- **ADR** when the user asks for an ADR or decision record, or the repo has `docs/adr/` or `docs/decisions/`. Number it after the highest existing ADR (`ls docs/adr`).
-- **Design doc** otherwise.
+- A format the user names wins ("design doc", "RFC", "ADR").
+- Otherwise use an **ADR** when the repo has `docs/adr/` or `docs/decisions/` (number it after the highest existing one, e.g. `ls docs/adr docs/decisions`), and a **design doc** when it doesn't.
 
 Design doc:
 ```

@@ -1,4 +1,5 @@
 ---
 type: regex
-pattern: "0002"
+pattern: "ADR 0002"
+flags: i
 ---
