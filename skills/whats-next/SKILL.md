@@ -20,7 +20,9 @@ base=$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null | sed 's|^o
 git log --oneline "$base"..HEAD
 gh pr list --search 'review-requested:@me' --limit 5
 gh pr checks
-ls incident-*.md
+grep -l '^Status: \(Open\|Mitigated\)' incident-*.md 2>/dev/null
+grep -l '^Status: Resolved' incident-*.md 2>/dev/null
+ls postmortem-*.md 2>/dev/null
 ```
 
 If MCP tools are available, also check: tickets assigned to me and not started (Jira, Linear); 1:1 meetings today (calendar). Otherwise skip.
@@ -31,8 +33,8 @@ Go down the table; take the first matches, max 3.
 
 | Signal | Suggest |
 |---|---|
-| `incident-*.md` without a "Resolved" line | `incident` |
-| `incident-*.md` resolved, no postmortem written | `postmortem` |
+| An `incident-*.md` with `Status: Open` or `Status: Mitigated` | `incident` |
+| An `incident-*.md` with `Status: Resolved` and no `postmortem-<same date>-<same slug>.md` | `postmortem` |
 | Failing checks on the current branch | `fix-bug` |
 | Uncommitted changes, or commits not yet on `<base>` | `ship-pr` |
 | Review requests waiting | `review-pr` |
