@@ -78,10 +78,10 @@ Each skill lives in `skills/<name>/SKILL.md` and ships with eval cases in `evals
 
 ```
 bash scripts/lint-skills.sh
-claude plugin eval . --scaffold --case '<name>-*'
+claude plugin eval . --scaffold --trust-plugin --no-publish --allow-tools Bash Edit Write --threshold 0.8 --case '<name>-*'
 ```
 
-A new skill must score higher with the plugin than without it.
+A skill must score at least 0.8 on every case, never lower than a plain agent, and higher than a plain agent wherever there is room to improve.
 
 ## License
 
