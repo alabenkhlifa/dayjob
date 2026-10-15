@@ -18,7 +18,7 @@ jobs:
       - run: >
           claude plugin eval . --trust-plugin --scaffold
           --allow-tools Bash Edit Write
-          --threshold 0.8 --no-publish --max-cost-usd 25
+          --threshold 0.8 --no-publish --max-cost-usd 40
           --json eval-results.json
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}

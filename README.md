@@ -72,6 +72,8 @@ git clone https://github.com/alabenkhlifa/dayjob.git
 cp -r dayjob/skills/* ~/.claude/skills/
 ```
 
+This overwrites existing skills with the same names (for example `refactor` or `incident`).
+
 ## Contributing
 
 Each skill lives in `skills/<name>/SKILL.md` and ships with eval cases in `evals/<name>-*/`. Before opening a PR:
