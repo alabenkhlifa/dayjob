@@ -13,7 +13,7 @@ Run these; skip any command that fails and keep going.
 
 1. Who it's with: manager (default), a report, or a peer. Take it from the user's words.
 2. Window: since the last 1:1 if the user says when; otherwise the last 14 days (`--since="14 days ago 00:00"`).
-3. Who am I: `git config user.name` and `git config user.email`.
+3. Who am I: `git config user.name` and `git config user.email`. If `user.email` and `user.name` are both empty, ask the user which author to use; never run `git log` with an empty `--author`.
 4. My commits: `git log --all --no-merges --author="<email>" --since="<window start>" --format='%h %ad %s' --date=short` (retry with `--author="<name>"` if empty).
 5. My PRs, only with a GitHub remote: `gh pr list --author @me --state all --search "updated:>=<YYYY-MM-DD>" --limit 20 2>/dev/null`. Note PRs waiting on review.
 6. Brag doc: read the path the user names, else `~/brag-doc.md` if it exists. Use entries in the window.

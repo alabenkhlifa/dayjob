@@ -18,8 +18,9 @@ git log -1 --format='%cr'
 base=$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null | sed 's|^origin/||')
 [ -n "$base" ] || base=$(git branch --list main master | head -1 | tr -d ' *')
 git log --oneline "$base"..HEAD
-gh pr list --search 'review-requested:@me' --limit 5
-gh pr checks
+# only with a GitHub remote (git remote -v):
+gh pr list --search 'review-requested:@me' --limit 5 2>/dev/null
+gh pr checks 2>/dev/null
 grep -l '^Status: \(Open\|Mitigated\)' incident-*.md 2>/dev/null
 grep -l '^Status: Resolved' incident-*.md 2>/dev/null
 ls postmortem-*.md 2>/dev/null
@@ -36,7 +37,7 @@ Go down the table; take the first matches, max 3.
 | An `incident-*.md` with `Status: Open` or `Status: Mitigated` | `incident` |
 | An `incident-*.md` with `Status: Resolved` and no `postmortem-<same date>-<same slug>.md` | `postmortem` |
 | Failing checks on the current branch | `fix-bug` |
-| Uncommitted changes, or commits not yet on `<base>` | `ship-pr` |
+| Uncommitted changes (ignore `incident-*.md` and `postmortem-*.md`), or commits not yet on `<base>` | `ship-pr` |
 | Review requests waiting | `review-pr` |
 | Start of the day or a greeting | `standup` |
 | Friday afternoon | `weekly-update` |

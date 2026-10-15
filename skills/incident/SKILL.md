@@ -37,7 +37,7 @@ Ask at most 3 quick questions, only for what you can't find: what is broken, who
 
 ```bash
 git log --since="24 hours ago" --format='%h %an %ar %s'
-gh run list --limit 5 2>/dev/null
+gh run list --limit 5 2>/dev/null   # only with a GitHub remote
 git tag --sort=-creatordate | head -5
 ```
 
@@ -45,7 +45,7 @@ Read the suspect diffs (`git show <hash>`). Match change times against when the 
 
 ## 4. Mitigate first
 
-Propose the fastest safe mitigation — revert the suspect change, roll back the deploy, flip a feature flag, scale up — with the exact command. **Never run a revert, reset, rollback, deploy, or push without an explicit yes.** Root cause can wait until users are OK.
+Propose the fastest safe mitigation — revert the suspect change, roll back the deploy, flip a feature flag, scale up — with the exact command. **Never run any mitigation or any command that changes a live system (revert, reset, rollback, deploy, push, restart, scale, feature flag, config change), and never edit project code, without an explicit yes.** Root cause can wait until users are OK.
 
 ## 5. Keep the timeline
 
@@ -66,5 +66,5 @@ When the user confirms it's fixed: set `Status: Resolved`, add the resolution to
 ## Rules
 
 - Mitigation before root cause.
-- No revert, reset, rollback, deploy, or push without an explicit yes.
+- No mitigation, no command that changes a live system (revert, reset, rollback, deploy, push, restart, scale, feature flag, config change), and no project code edit without an explicit yes.
 - UTC times. Facts, not blame.

@@ -16,9 +16,14 @@ Run these; skip any command that fails and keep going.
 3. Audience: the manager unless the user says the team. Ask only if it changes the content.
 4. My commits on all branches:
    `git log --all --no-merges --author="<email>" --since="<window start>" --format='%h %ad %s' --date=short`
-   If that is empty, retry with `--author="<name>"`.
+   If that is empty, retry with `--author="<name>"`. If `user.email` and `user.name` are both empty, ask the user which author to use; never run `git log` with an empty `--author`.
 5. My PRs, only with a GitHub remote: `gh pr list --author @me --state all --search "updated:>=<YYYY-MM-DD>" --limit 30 2>/dev/null`.
-6. Work in progress: `git status --short --branch` and branches with my recent commits that are not on the base branch.
+6. Work in progress: `git status --short --branch` and branches with my recent commits that are not on the base branch (`<base>`, via `$base`):
+   ```bash
+   base=$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null | sed 's|^origin/||')
+   [ -n "$base" ] || base=$(git branch --list main master | head -1 | tr -d ' *')
+   ```
+   If `<base>` comes back empty, skip the not-on-base check.
 7. If a Jira or Linear MCP tool is available: my tickets moved this week. Otherwise skip.
 
 If steps 4, 5 and 7 find nothing for this identity, reply: "No activity found for <email> in the last 7 days." Then ask what to include. Never fill the gap with other people's work, and never name or describe their commits, even to say you left them out.

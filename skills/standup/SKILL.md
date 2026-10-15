@@ -15,7 +15,7 @@ Run these; skip any command that fails and keep going. If `git` itself will not 
 2. Window: since the last working day. If `date +%u` prints 1 (Monday), use `--since="last friday 00:00"`; otherwise `--since="yesterday 00:00"`. A range the user gives wins. For `gh` dates use `d=$(date -v-1d +%F 2>/dev/null || date -d yesterday +%F)` (Monday: `-v-3d` / `"3 days ago"`).
 3. My commits on all branches:
    `git log --all --no-merges --author="<email>" --since="<window start>" --format='%h %ad %s' --date=short`
-   If that is empty, retry with `--author="<name>"`.
+   If that is empty, retry with `--author="<name>"`. If `user.email` and `user.name` are both empty, ask the user which author to use; never run `git log` with an empty `--author`.
 4. My PRs, only if `git remote -v` shows a GitHub remote: `gh pr list --author @me --state all --search "updated:>=<YYYY-MM-DD>" --limit 20 2>/dev/null`. Always append `2>/dev/null` to `gh` calls.
 5. Work in progress: `git status --short --branch`.
 6. If a Jira or Linear MCP tool is available: my in-progress tickets. Otherwise skip.

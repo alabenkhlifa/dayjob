@@ -25,7 +25,7 @@ Path: the one the user names; otherwise `~/brag-doc.md`.
 3. Write the entry as `- <what you did> — <impact>`, in the user's words, tightened.
 4. Confirm in one line with the path. Logging is what the user asked for, so no extra confirmation is needed.
 
-No file yet and the user wants to backfill? Draft entries from their own commits (`git log --author="<email>" --since=<date> --format='%ad %s' --date=short`), show them, and write only after a yes.
+No file yet and the user wants to backfill? Draft entries from their own commits (`git log --author="<email>" --since=<date> --format='%ad %s' --date=short`), show them, and write only after a yes. If `user.email` and `user.name` are both empty, ask the user which author to use; never run `git log` with an empty `--author`.
 
 ## Draft a self-review
 

@@ -29,6 +29,7 @@ If `<base>` comes back empty (no `origin/HEAD` and no `main` or `master`), ask t
 
 - **On the base branch with changes:** create a branch first, `git switch -c <type>/<short-slug>`, named after the change. Never commit to the base branch unless the user explicitly asks to commit to it.
 - **Never stage secrets or junk:** `.env*`, `*.pem`, `*.key`, credential files, `node_modules/`, build output, large binaries. If any are untracked, leave them out, tell the user, and suggest a `.gitignore` line. If one is already staged (check `git diff --cached --name-only`), unstage it with `git restore --staged <file>`, tell the user, and suggest `.gitignore`.
+- **Incident notes stay out:** leave `incident-*.md` and `postmortem-*.md` unstaged unless the user asks to commit them.
 - **Stage by explicit path.** Never `git add -A`, `git add .`, `git add --all`, or `git commit -a`.
 - Run the project's tests or lint if it has them; report failures before committing.
 
