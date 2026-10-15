@@ -12,7 +12,15 @@ Draft a paste-ready weekly update from real activity: Shipped / In progress / Ri
 Run these; skip any command that fails and keep going.
 
 1. Who am I: `git config user.name` and `git config user.email`.
-2. Window: the last 7 days (`--since="7 days ago 00:00"`). A range the user gives wins.
+2. Window: this week, Monday 00:00 to now. Get the dates:
+   ```bash
+   mon=$(date -v-$(( $(date +%u) - 1 ))d +%F 2>/dev/null || date -d "$(( $(date +%u) - 1 )) days ago" +%F)
+   prev=$(date -v-$(( $(date +%u) + 6 ))d +%F 2>/dev/null || date -d "$(( $(date +%u) + 6 )) days ago" +%F)
+   ```
+   - This week (default): `--since="$mon 00:00"`; PRs `updated:>=$mon`.
+   - If today is Monday (`date +%u` prints 1) and the user did not say "this week", use last week instead.
+   - Last week: `--since="$prev 00:00" --until="$mon 00:00"`; PRs `updated:$prev..$mon`.
+   - A range the user gives wins ("this week", "last week", "last 7 days", dates).
 3. Audience: the manager unless the user says the team. Ask only if it changes the content.
 4. My commits on all branches:
    `git log --all --no-merges --author="<email>" --since="<window start>" --format='%h %ad %s' --date=short`
