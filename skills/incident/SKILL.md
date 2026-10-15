@@ -37,9 +37,15 @@ Ask at most 3 quick questions, only for what you can't find: what is broken, who
 
 ```bash
 git log --since="24 hours ago" --format='%h %an %ar %s'
-gh run list --limit 5 2>/dev/null   # only with a GitHub remote
+gh run list --limit 5 2>/dev/null   # only with a GitHub remote, as the gh account picked below
 git tag --sort=-creatordate | head -5
 ```
+
+**`gh` account:** the user may have several `gh` accounts, and the active one may not see this repo. Before the first `gh` call, list each account's access:
+```bash
+for u in $(gh auth status 2>&1 | sed -n 's/.*account \([^ ]*\).*/\1/p'); do echo "$u $(GH_TOKEN=$(gh auth token --user "$u") gh repo view --json viewerPermission -q .viewerPermission 2>/dev/null)"; done; true
+```
+Pick the first account with ADMIN, MAINTAIN or WRITE, else one with READ or TRIAGE. If none shows a permission, skip every `gh` call. Run every `gh` call as that account, `GH_TOKEN=$(gh auth token --user <account>) gh ...`, with `2>/dev/null`. Never run `gh auth switch`.
 
 Read the suspect diffs (`git show <hash>`). Match change times against when the symptom started.
 

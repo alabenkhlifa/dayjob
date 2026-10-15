@@ -23,6 +23,13 @@ If `<base>` comes back empty (no `origin/HEAD` and no `main` or `master`), ask t
 - Branch → `git log <base>..<branch>` and `git diff <base>...<branch>`.
 - Nothing given → the current branch against its base.
 
+**`gh` account:** the user may have several `gh` accounts, and the active one may not see this repo. Before the first `gh` call, list each account's access:
+```bash
+for u in $(gh auth status 2>&1 | sed -n 's/.*account \([^ ]*\).*/\1/p'); do echo "$u $(GH_TOKEN=$(gh auth token --user "$u") gh repo view --json viewerPermission -q .viewerPermission 2>/dev/null)"; done; true
+```
+Pick the first account with ADMIN, MAINTAIN or WRITE, else one with READ or TRIAGE. If none shows a permission, skip every `gh` call. Run every `gh` call as that account, `GH_TOKEN=$(gh auth token --user <account>) gh ...`, with `2>/dev/null`. Never run `gh auth switch`.
+If `git fetch` fails with "Repository not found", retry it with that account's token: `git -c credential.helper= -c 'credential.helper=!f(){ echo username=<account>; echo "password=$(gh auth token --user <account>)"; }; f' fetch ...`.
+
 Read the description first and judge the code against what it claims to do.
 
 ## 2. Read beyond the diff

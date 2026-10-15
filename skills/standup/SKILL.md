@@ -16,7 +16,13 @@ Run these; skip any command that fails and keep going. If `git` itself will not 
 3. My commits on all branches, with the branch each came from (`%S`):
    `git log --all --source --no-merges --author="<email>" --since="<window start>" --format='%h %S %ad %s' --date=short`
    If that is empty, retry with `--author="<name>"`. If `user.email` and `user.name` are both empty, ask the user which author to use; never run `git log` with an empty `--author`.
-4. My PRs, only if `git remote -v` shows a GitHub remote: `gh pr list --author @me --state all --search "updated:>=<YYYY-MM-DD>" --limit 20 2>/dev/null`. Always append `2>/dev/null` to `gh` calls.
+4. GitHub, only if `git remote -v` shows a GitHub remote. The user may have several `gh` accounts, and the active one may not see this repo. List each account's access:
+   ```bash
+   for u in $(gh auth status 2>&1 | sed -n 's/.*account \([^ ]*\).*/\1/p'); do echo "$u $(GH_TOKEN=$(gh auth token --user "$u") gh repo view --json viewerPermission -q .viewerPermission 2>/dev/null)"; done; true
+   ```
+   Pick the first account with ADMIN, MAINTAIN or WRITE, else one with READ or TRIAGE. If none shows a permission, skip every `gh` call. Run every `gh` call as that account, `GH_TOKEN=$(gh auth token --user <account>) gh ...`, with `2>/dev/null`. Never run `gh auth switch`.
+   - My PRs: `gh pr list --author @me --state all --search "updated:>=<YYYY-MM-DD>" --limit 20`
+   - My CI runs: `gh run list --user <account> --limit 5`
 5. Work in progress: `git status --short --branch`.
 6. If a board tool is available (Jira, Linear, ClickUp, Trello, Asana, GitHub or GitLab issues, as MCP tools): my in-progress tickets with their titles. Otherwise skip.
 7. Ticket refs: for each commit, take its ref from the subject; if the subject has none, from its branch name (`%S`); then from its PR title. One commit can carry several. Learn the format from the repo's own branches and commits:

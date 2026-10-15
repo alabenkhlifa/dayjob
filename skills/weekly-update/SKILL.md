@@ -17,7 +17,12 @@ Run these; skip any command that fails and keep going.
 4. My commits on all branches:
    `git log --all --no-merges --author="<email>" --since="<window start>" --format='%h %ad %s' --date=short`
    If that is empty, retry with `--author="<name>"`. If `user.email` and `user.name` are both empty, ask the user which author to use; never run `git log` with an empty `--author`.
-5. My PRs, only with a GitHub remote: `gh pr list --author @me --state all --search "updated:>=<YYYY-MM-DD>" --limit 30 2>/dev/null`.
+5. My PRs, only with a GitHub remote. The user may have several `gh` accounts, and the active one may not see this repo. List each account's access:
+   ```bash
+   for u in $(gh auth status 2>&1 | sed -n 's/.*account \([^ ]*\).*/\1/p'); do echo "$u $(GH_TOKEN=$(gh auth token --user "$u") gh repo view --json viewerPermission -q .viewerPermission 2>/dev/null)"; done; true
+   ```
+   Pick the first account with ADMIN, MAINTAIN or WRITE, else one with READ or TRIAGE. If none shows a permission, skip every `gh` call. Run every `gh` call as that account, `GH_TOKEN=$(gh auth token --user <account>) gh ...`, with `2>/dev/null`. Never run `gh auth switch`.
+   `gh pr list --author @me --state all --search "updated:>=<YYYY-MM-DD>" --limit 30`
 6. Work in progress: `git status --short --branch` and branches with my recent commits that are not on the base branch (`<base>`, via `$base`):
    ```bash
    base=$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null | sed 's|^origin/||')

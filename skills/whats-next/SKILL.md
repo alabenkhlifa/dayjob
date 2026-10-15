@@ -21,13 +21,19 @@ base=$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null | sed 's|^o
 git log --oneline "$base"..HEAD
 # task lists this branch changed that still have open items:
 git diff --name-only --diff-filter=d "$(git merge-base "$base" HEAD 2>/dev/null)" -- '*.md' ':!incident-*' ':!postmortem-*' 2>/dev/null | xargs grep -l '^ *[-*] \[ \]' 2>/dev/null
-# only with a GitHub remote (git remote -v):
+# only with a GitHub remote (git remote -v), as the gh account picked below:
 gh pr list --search 'review-requested:@me' --limit 5 2>/dev/null
 gh pr checks 2>/dev/null
 grep -l '^Status: \(Open\|Mitigated\)' incident-*.md 2>/dev/null
 grep -l '^Status: Resolved' incident-*.md 2>/dev/null
 ls postmortem-*.md 2>/dev/null || true
 ```
+
+**`gh` account:** the user may have several `gh` accounts, and the active one may not see this repo. Before the first `gh` call, list each account's access:
+```bash
+for u in $(gh auth status 2>&1 | sed -n 's/.*account \([^ ]*\).*/\1/p'); do echo "$u $(GH_TOKEN=$(gh auth token --user "$u") gh repo view --json viewerPermission -q .viewerPermission 2>/dev/null)"; done; true
+```
+Pick the first account with ADMIN, MAINTAIN or WRITE, else one with READ or TRIAGE. If none shows a permission, skip every `gh` call. Run every `gh` call as that account, `GH_TOKEN=$(gh auth token --user <account>) gh ...`, with `2>/dev/null`. Never run `gh auth switch`.
 
 If `git rev-parse` prints nothing, this is not a git repo: skip the git and `gh` lines and the rows that need them, and find task lists with these instead:
 
@@ -36,7 +42,7 @@ grep -l '^ *[-*] \[ \]' tasks.md TODO.md 2>/dev/null
 grep -rl --include=tasks.md '^ *[-*] \[ \]' openspec/changes 2>/dev/null || true
 ```
 
-If MCP tools are available, also check: tickets assigned to me and not started (Jira, Linear); 1:1 meetings today (calendar). Otherwise skip.
+If MCP tools are available, also check: tickets assigned to me and not started (Jira, Linear, ClickUp, Trello, Asana); 1:1 meetings today (calendar). Otherwise skip.
 
 ## Pick
 

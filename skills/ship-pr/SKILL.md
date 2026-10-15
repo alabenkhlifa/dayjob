@@ -68,6 +68,13 @@ gh pr create --title "<title>" --body-file <file>
 
 If the remote is not GitHub (e.g. GitLab) or `gh` is missing, give the push command and the compare/MR URL or paste-ready text instead of `gh pr create`.
 
+**`gh` account:** the user may have several `gh` accounts, and the active one may not see this repo. Before the first `gh` call, list each account's access:
+```bash
+for u in $(gh auth status 2>&1 | sed -n 's/.*account \([^ ]*\).*/\1/p'); do echo "$u $(GH_TOKEN=$(gh auth token --user "$u") gh repo view --json viewerPermission -q .viewerPermission 2>/dev/null)"; done; true
+```
+Pick the first account with ADMIN, MAINTAIN or WRITE, else one with READ or TRIAGE. If none shows a permission, skip every `gh` call. Run every `gh` call as that account, `GH_TOKEN=$(gh auth token --user <account>) gh ...`, with `2>/dev/null`. Never run `gh auth switch`.
+If `git push` fails with "Repository not found" or a 403, retry it with that account's token: `git -c credential.helper= -c 'credential.helper=!f(){ echo username=<account>; echo "password=$(gh auth token --user <account>)"; }; f' push -u origin <branch>`.
+
 ## Rules
 
 - Never push or open a PR without an explicit yes.

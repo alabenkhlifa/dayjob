@@ -9,9 +9,15 @@ Turn a ticket into the smallest correct change that follows the codebase's patte
 
 ## 1. Get the ticket
 
-- A ticket id like `PROJ-123` and a Jira or Linear MCP tool is available → fetch summary, description, acceptance criteria.
-- A GitHub issue number or URL → `gh issue view <n>`.
+- A ticket id like `PROJ-123` and a board tool is available (Jira, Linear, ClickUp, Trello, Asana, as MCP tools) → fetch summary, description, acceptance criteria.
+- A GitHub issue number or URL → `gh issue view <n>`, as the `gh` account picked below.
 - Otherwise use the text the user gave. If there is none, ask for it.
+
+**`gh` account:** the user may have several `gh` accounts, and the active one may not see this repo. Before the first `gh` call, list each account's access:
+```bash
+for u in $(gh auth status 2>&1 | sed -n 's/.*account \([^ ]*\).*/\1/p'); do echo "$u $(GH_TOKEN=$(gh auth token --user "$u") gh repo view --json viewerPermission -q .viewerPermission 2>/dev/null)"; done; true
+```
+Pick the first account with ADMIN, MAINTAIN or WRITE, else one with READ or TRIAGE. If none shows a permission, skip every `gh` call. Run every `gh` call as that account, `GH_TOKEN=$(gh auth token --user <account>) gh ...`, with `2>/dev/null`. Never run `gh auth switch`.
 
 ## 2. Find the gaps — stop here first
 
