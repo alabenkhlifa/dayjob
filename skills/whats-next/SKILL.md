@@ -5,7 +5,7 @@ description: Use when the user asks what to work on, what's next, where to start
 
 # What's next
 
-Look at where the engineer is in their day and suggest the 1–3 dayjob skills that fit right now. Suggest only; never run them yourself.
+Look at where the engineer is in their day and suggest the 1–3 skills that fit right now. Suggest only; never run them yourself.
 
 ## Gather context
 
@@ -58,6 +58,8 @@ Go down the table; take the first matches, max 3, each skill once.
 | Nothing above | `start-ticket`, reason "no open work found on <branch>"; or ask what they're working on |
 
 Only suggest skills that are installed (they appear in your available skills); skip any row whose skill isn't installed.
+
+If another installed skill or command does the same job as a row's skill (a project `/commit` for `ship-pr`, a task runner like `/opsx:apply` for `start-ticket`), suggest that one in its place.
 
 `<base>` is the remote's default branch (snippet above), falling back to `main` or `master`.
 
