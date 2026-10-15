@@ -24,7 +24,7 @@ Run these; skip any command that fails and keep going.
    [ -n "$base" ] || base=$(git branch --list main master | head -1 | tr -d ' *')
    ```
    If `<base>` comes back empty, skip the not-on-base check.
-7. If a Jira or Linear MCP tool is available: my tickets moved this week. Otherwise skip.
+7. If a board tool is available (Jira, Linear, ClickUp, Trello, Asana, GitHub or GitLab issues, as MCP tools): my tickets moved this week. Otherwise skip.
 
 If steps 4, 5 and 7 find nothing for this identity, reply: "No activity found for <email> in the last 7 days." Then ask what to include. Never fill the gap with other people's work, and never name or describe their commits, even to say you left them out.
 

@@ -25,7 +25,7 @@ Coding agents got good at writing code. The job is more than that:
 - PR descriptions say "fix stuff", and reviews miss the bug that matters.
 - The Friday update, the postmortem, the 1:1 prep, the self-review: all from memory, all at the last minute.
 
-dayjob gives your agent a skill for each of these, built on what is already in your repo (git, `gh`) and on your tools when they are connected (Jira, Linear, Slack, calendar).
+dayjob gives your agent a skill for each of these, built on what is already in your repo (git, `gh`) and on your tools when they are connected (Jira, Linear, ClickUp, Slack, calendar).
 
 ## How it works
 

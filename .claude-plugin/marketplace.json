@@ -9,7 +9,7 @@
     {
       "name": "dayjob",
       "description": "Your agent writes the code. dayjob handles the rest of the job: standups, tickets, PRs, reviews, incidents, 1:1s.",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "source": "./",
       "author": {
         "name": "Ala Ben Khalifa",
