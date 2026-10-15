@@ -29,11 +29,11 @@ dayjob gives your agent a skill for each of these, built on what is already in y
 
 ## How it works
 
-Ask `whats-next` anytime. It reads your branch, your open PRs and the time of day, and points you to the skill that fits.
+Ask `whats-next` anytime. It reads your branch, your open PRs, your task list and the time of day, and points you to the skill that fits.
 
 | Rhythm | Skill | What it does |
 |---|---|---|
-| Anytime | `whats-next` | Reads your branch, PRs and time of day; tells you which skill fits now |
+| Anytime | `whats-next` | Reads your branch, PRs, task list and time of day; tells you which skill fits now |
 | Daily | `standup` | Yesterday / Today / Blockers from your commits, PRs and tickets |
 | | `start-ticket` | Ticket → questions → plan → the smallest change that fits the codebase |
 | | `fix-bug` | Root cause first, fix at the source, prove nothing else broke |

@@ -13,31 +13,43 @@ Run these; skip any that fail and never mention the failure.
 
 ```bash
 date '+%A %H:%M'
+git rev-parse --is-inside-work-tree 2>/dev/null
 git status --short --branch
 git log -1 --format='%cr'
 base=$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null | sed 's|^origin/||')
 [ -n "$base" ] || base=$(git branch --list main master | head -1 | tr -d ' *')
 git log --oneline "$base"..HEAD
+# task lists this branch changed that still have open items:
+git diff --name-only --diff-filter=d "$(git merge-base "$base" HEAD 2>/dev/null)" -- '*.md' ':!incident-*' ':!postmortem-*' 2>/dev/null | xargs grep -l '^ *[-*] \[ \]' 2>/dev/null
 # only with a GitHub remote (git remote -v):
 gh pr list --search 'review-requested:@me' --limit 5 2>/dev/null
 gh pr checks 2>/dev/null
 grep -l '^Status: \(Open\|Mitigated\)' incident-*.md 2>/dev/null
 grep -l '^Status: Resolved' incident-*.md 2>/dev/null
-ls postmortem-*.md 2>/dev/null
+ls postmortem-*.md 2>/dev/null || true
+```
+
+If `git rev-parse` prints nothing, this is not a git repo: skip the git and `gh` lines and the rows that need them, and find task lists with these instead:
+
+```bash
+grep -l '^ *[-*] \[ \]' tasks.md TODO.md 2>/dev/null
+grep -rl --include=tasks.md '^ *[-*] \[ \]' openspec/changes 2>/dev/null || true
 ```
 
 If MCP tools are available, also check: tickets assigned to me and not started (Jira, Linear); 1:1 meetings today (calendar). Otherwise skip.
 
 ## Pick
 
-Go down the table; take the first matches, max 3.
+Go down the table; take the first matches, max 3, each skill once.
 
 | Signal | Suggest |
 |---|---|
 | An `incident-*.md` with `Status: Open` or `Status: Mitigated` | `incident` |
 | An `incident-*.md` with `Status: Resolved` and no `postmortem-<same date>-<same slug>.md` | `postmortem` |
 | Failing checks on the current branch | `fix-bug` |
-| Uncommitted changes (ignore `incident-*.md` and `postmortem-*.md`), or commits not yet on `<base>` | `ship-pr` |
+| Uncommitted changes (ignore `incident-*.md` and `postmortem-*.md`) | `ship-pr` |
+| An open item (`- [ ]`) in a task list found above | `start-ticket`, naming the first open item (number and title) |
+| Commits not yet on `<base>`, and no open item in a task list | `ship-pr` |
 | Review requests waiting | `review-pr` |
 | Start of the day or a greeting | `standup` |
 | Friday afternoon | `weekly-update` |
@@ -60,7 +72,7 @@ If `<base>` comes back empty, skip the "commits not yet on `<base>`" check.
 Say "go" to start `<first skill>`.
 ```
 
-0–2 "Also" lines. Whole reply under 8 lines.
+The reply is exactly this template: the "Right now" line, 0–2 "Also" lines, and the "Say go" line.
 
 ## Rules
 
