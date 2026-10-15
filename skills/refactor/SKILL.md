@@ -18,6 +18,13 @@ Modes:
 
 ## 2. Baseline
 
+Run `git status --short` first. If files other than the target have uncommitted changes, stop: name them and ask which the user wants:
+- commit them first;
+- refactor in a separate worktree off the base branch (`git worktree add <sibling folder> -b refactor/<slug> <base>`);
+- continue here, with the refactor mixed into those changes.
+
+Change no file until the user answers. A new branch alone does not separate them: uncommitted changes move with it.
+
 Find the test and build commands (package.json, Makefile, README, CI config) and run them **before** changing anything. Record the result.
 
 - No tests cover the target → say so and offer to add characterization tests first. Ask before going on.
@@ -45,6 +52,7 @@ Skipped: <ideas you did not do, and why (risky, changes behavior, out of scope)>
 ## Rules
 
 - No file changes in auto mode until the user picks a mode.
+- No file changes while other files have uncommitted changes, until the user says how to handle them.
 - Tests before and after; never claim green without running them.
 - Behavior and public API stay the same unless the user approves.
 - Tests are never weakened to pass.
